@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"log"
 	"net/http"
 	"strconv"
 )
@@ -23,7 +22,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 	html, err := template.ParseFiles(files...)
 
 	if err != nil {
-		log.Println(err.Error())
+		errorlog.Println(err.Error())
 		http.Error(w, "internal server error", 500)
 		return
 	}
@@ -31,7 +30,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 	err = html.ExecuteTemplate(w, "base", nil)
 
 	if err != nil {
-		log.Println(err.Error())
+		errorlog.Println(err.Error())
 		http.Error(w, "internal server error", 500)
 	}
 
